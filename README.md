@@ -1,36 +1,81 @@
-# Text Classification using LSTM: Spam or Ham
+# Spam vs. Ham Text Classification Using LSTM
 
-## 1. Introduction
-This project aims to classify text messages as either spam or ham (non-spam) using a Long Short-Term Memory (LSTM) neural network. LSTM networks are well-suited for sequential data and can capture long-range dependencies, making them ideal for text classification tasks.
+This project focuses on classifying text messages as either spam or ham (not spam) using a Long Short-Term Memory (LSTM) neural network. The LSTM model is designed to capture the sequential patterns in the text, enabling effective classification of messages.
 
-## 2. Dataset
-The dataset consists of labeled text messages. Each message is labeled as either "spam" or "ham." The dataset is preprocessed to remove noise, convert text to lowercase, and tokenize the words.
+## Table of Contents
+- [Overview](#overview)
+- [Installation](#installation)
+- [Dataset](#dataset)
+- [Model Architecture](#model-architecture)
+- [Training](#training)
+- [Evaluation](#evaluation)
+- [Results](#results)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-## 3. Data Preprocessing
-- **Text Cleaning:** Remove special characters, punctuation, and numbers.
-- **Tokenization:** Convert text into a sequence of tokens (words).
-- **Padding:** Ensure all sequences have the same length by padding shorter sequences.
-- **Label Encoding:** Convert labels ("spam" or "ham") to binary values.
+## Overview
+This project demonstrates the use of LSTM, a type of Recurrent Neural Network (RNN), to classify text messages into spam or ham. The model is trained on a labeled dataset and can be used to predict whether new incoming messages are spam or not.
 
-## 4. Model Architecture
-The LSTM model consists of the following layers:
-- **Embedding Layer:** Converts words into dense vectors.
-- **LSTM Layer:** Captures sequential dependencies in the text.
-- **Dense Layer:** Fully connected layer with ReLU activation.
-- **Output Layer:** Sigmoid activation for binary classification.
+## Installation
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/alihassanml/Spam-Text-Detection-LSTM.git
+    cd spam-ham-classification
+    ```
 
-## 5. Training
-- **Loss Function:** Binary Crossentropy.
-- **Optimizer:** Adam.
-- **Metrics:** Accuracy.
+2. Create a virtual environment and activate it:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    ```
 
-The model is trained on a training set with validation to monitor overfitting. Early stopping is used to halt training when validation performance stops improving.
+3. Install the required dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-## 6. Evaluation
-The model is evaluated using accuracy, precision, recall, and F1-score. Confusion matrix and ROC curve analysis are also performed.
+## Dataset
+The dataset used for training consists of labeled text messages where each message is tagged as "spam" or "ham". The dataset should be preprocessed to remove noise, tokenize the text, and convert it into sequences of word indices.
 
-## 7. Results
-- The LSTM model achieved high accuracy on both the training and validation datasets, effectively distinguishing between spam and ham messages.
+## Model Architecture
+The model is built using the following layers:
+- **Embedding Layer:** Converts input words into dense vectors of fixed size.
+- **LSTM Layers:** Three LSTM layers with 150 units each to capture sequential dependencies.
+- **Dropout Layers:** Applied to prevent overfitting.
+- **Dense Layer:** A single neuron with a sigmoid activation function for binary classification.
 
-## 8. Conclusion
-The LSTM-based model successfully classifies text messages as spam or ham with high accuracy. This approach can be extended to other text classification tasks with minor adjustments.
+## Training
+The model is trained using the binary cross-entropy loss function and the Adam optimizer. Early stopping and learning rate reduction strategies are applied to prevent overfitting and ensure better convergence.
+
+## Evaluation
+The model’s performance is evaluated using metrics such as accuracy, precision, recall, and F1-score. The confusion matrix helps in understanding the types of errors made by the model.
+
+### Confusion Matrix
+\[
+\begin{bmatrix}
+1581 & 6 \\
+29 & 223
+\end{bmatrix}
+\]
+- **Accuracy:** 98.09%
+- **Precision:** 97.42%
+- **Recall:** 88.53%
+- **F1-Score:** 92.79%
+
+## Results
+The model achieved high accuracy, precision, and F1-score, indicating it is effective in distinguishing spam from ham. However, the model can be further fine-tuned to improve recall, reducing false negatives.
+
+## Usage
+To use the model, you can run the `predict.py` script with a new text message as input:
+```bash
+python predict.py --message "Your free coupon is waiting! Click now!"
+```
+
+The script will output whether the message is spam or ham.
+
+## Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+This project is licensed under the MIT License.
